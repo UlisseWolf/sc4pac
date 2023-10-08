@@ -1,0 +1,10 @@
+{
+  "$type": "Asset",
+  "assetId": "bsc-vip-girafe-villa-libeskind-v2-gdrive",
+  "version": "1",
+  "url": "https://drive.usercontent.google.com/uc?id=1OLvpzo_hs5gefkJCYfcOxVPhKlMxOoyU&authuser=0&export=download",
+  "lastModified": "2023-11-03T09:31:24Z",
+  "requiredBy": [
+    "girafe:hedges"
+  ]
+}

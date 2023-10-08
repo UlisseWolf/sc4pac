@@ -1,0 +1,10 @@
+{
+  "$type": "Asset",
+  "assetId": "vip-orange-fagus-seasonal-flora",
+  "version": "1.0",
+  "url": "https://drive.usercontent.google.com/uc?id=1LYOYzlhCC1bTJEKje0HhymXOCocnel5H&authuser=0&export=download",
+  "lastModified": "2022-08-09T10:53:17Z",
+  "requiredBy": [
+    "orange:fagus"
+  ]
+}

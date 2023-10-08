@@ -1,0 +1,27 @@
+{
+  "$type": "Package",
+  "group": "bsc",
+  "name": "bat-props-lil-vol2",
+  "version": "1",
+  "subfolder": "100-props-textures",
+  "info": {
+    "summary": "BSC BAT Props LiL Vol2 by Lilith",
+    "website": "https://www.sc4evermore.com/index.php/downloads/download/3-sc4d-lex-legacy-bsc-common-dependencies-pack"
+  },
+  "variants": [
+    {
+      "variant": {},
+      "assets": [
+        {
+          "assetId": "sc4d-lex-legacy-bsc-common-dependencies-pack",
+          "include": [
+            "/BSC BAT Props LiL Vol2.DAT"
+          ]
+        }
+      ]
+    }
+  ],
+  "metadataSource": [
+    "bsc/common-dependencies.yaml"
+  ]
+}

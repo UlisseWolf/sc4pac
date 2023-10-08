@@ -1,0 +1,37 @@
+{
+  "$type": "Package",
+  "group": "girafe",
+  "name": "hedges",
+  "version": "1",
+  "subfolder": "100-props-textures",
+  "info": {
+    "summary": "Hedge props originally distributed with Villa Libeskind",
+    "author": "Girafe",
+    "requiredBy": [
+      "kingofsimcity:community-regional-park-pack-vol2-baseball-fields",
+      "kingofsimcity:community-regional-park-pack-vol2-community-parks",
+      "kingofsimcity:community-regional-park-pack-vol2-desolate-parks",
+      "kingofsimcity:community-regional-park-pack-vol2-royal-trails",
+      "kingofsimcity:community-regional-park-pack-vol2-soccer-fields",
+      "kingofsimcity:community-regional-park-pack-vol2-softball-fields",
+      "kingofsimcity:community-regional-park-pack-vol2-sports-complexes",
+      "kingofsimcity:community-regional-park-pack-vol2-tennis-parks"
+    ]
+  },
+  "variants": [
+    {
+      "variant": {},
+      "assets": [
+        {
+          "assetId": "bsc-vip-girafe-villa-libeskind-v2-gdrive",
+          "include": [
+            "/Grfe_Props_Pack_LE_Hedges.dat"
+          ]
+        }
+      ]
+    }
+  ],
+  "metadataSource": [
+    "girafe/hedges.yaml"
+  ]
+}

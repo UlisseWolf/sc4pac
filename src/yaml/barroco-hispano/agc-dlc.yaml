@@ -30,7 +30,7 @@ lastModified: "2023-12-08T23:54:20Z"
 ### agc monuments props
 group: "agc"
 name: "monuments-props"
-version: "6.0.0"
+version: "7.0.0"
 subfolder: "100-props-textures"
 info:
   summary: "Monument props made by Barroco Hispano"
@@ -43,7 +43,7 @@ info:
 variants:
 - variant: { nightmode: "standard" }
   assets:
-  - assetId: "agc-monuments-props-mn"
+  - assetId: "agc-monuments-props-dn"  # MN support removed in 7.0.0
 - variant: { nightmode: "dark" }
   dependencies:
   - "simfox:day-and-nite-mod"
@@ -51,15 +51,10 @@ variants:
   - assetId: "agc-monuments-props-dn"
 
 ---
-url: "https://community.simtropolis.com/files/file/35941-agc-monuments-dlc/?do=download&r=201402"
+url: "https://community.simtropolis.com/files/file/35941-agc-monuments-dlc/?do=download"
 assetId: "agc-monuments-props-dn"
-version: "6.0.0"
-lastModified: "2024-05-19T17:30:16Z"
----
-url: "https://community.simtropolis.com/files/file/35941-agc-monuments-dlc/?do=download&r=201401"
-assetId: "agc-monuments-props-mn"
-version: "6.0.0"
-lastModified: "2024-05-19T17:30:16Z"
+version: "7.0.0"
+lastModified: "2025-02-17T23:33:20Z"
 
 
 ---
@@ -132,7 +127,7 @@ lastModified: "2023-12-19T00:46:38Z"
 ### agc street props
 group: "agc"
 name: "street-props"
-version: "3.0.0"
+version: "5.0.0"
 subfolder: "100-props-textures"
 info:
   summary: "Small props for streets and sidewalks"
@@ -146,7 +141,7 @@ info:
 variants:
 - variant: { nightmode: "standard" }
   assets:
-  - assetId: "agc-street-props-mn"
+  - assetId: "agc-street-props-dn"  # MN support removed
 - variant: { nightmode: "dark" }
   dependencies:
   - "simfox:day-and-nite-mod"
@@ -155,16 +150,11 @@ variants:
 
 
 ---
-url: "https://community.simtropolis.com/files/file/36152-agc-streets-dlc/?do=download&r=201345"
+url: "https://community.simtropolis.com/files/file/36152-agc-streets-dlc/?do=download"
 assetId: "agc-street-props-dn"
-version: "3.0.0"
-lastModified: "2024-05-15T15:50:26Z"
+version: "5.0.0"
+lastModified: "2025-08-02T01:02:35Z"
 
----
-url: "https://community.simtropolis.com/files/file/36152-agc-streets-dlc/?do=download&r=201344"
-assetId: "agc-street-props-mn"
-version: "3.0.0"
-lastModified: "2024-05-15T15:50:26Z"
 
 # ---
 # Commented out for now until needed as a dependency. Needs decision whether or not to package the lots. The purpose of the lots may need more explanation.

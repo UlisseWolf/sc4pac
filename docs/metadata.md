@@ -4,6 +4,10 @@ This page details how to write, for an existing mod, custom metadata that is und
 The metadata is stored in [YAML](https://en.wikipedia.org/wiki/YAML) files which can be edited in any text editor
 and consists of *assets* and *packages*, as defined below.
 
+?> If you use the [*sc4pac* STEX integration](https://community.simtropolis.com/forums/topic/763620-simtropolis-x-sc4pac-a-new-way-to-install-plugins/),
+   most of this metadata is already created automatically.
+   In that case, the information on this page is only needed for customizing the metadata of plugins with more complex installation requirements.
+
 ?> An interactive editor for creating and editing metadata files is available online:
    [YAML editor for sc4pac](https://yamleditorforsc4pac.net/).
    The editor assists you in obtaining the required metadata and producing syntactically valid metadata files.
@@ -91,7 +95,11 @@ If present, the checksum of the file is checked directly after download, before 
 checksum:
   sha256: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 ```
-This is recommended for files that are downloaded using http instead of https.
+
+Use this especially for files that are downloaded using http instead of https.
+This is required for http files in the default channel, but can be omitted in local channels.
+
+The file hash can be acquired via PowerShell with `Get-FileHash asset.zip | Format-List` or via Bash with `sha256sum asset.zip`.
 
 ### `nonPersistentUrl`
 
@@ -191,6 +199,17 @@ dependencies:
 - "lupin:shrieking-shack"
 - "madam-hooch:brooms-and-quidditch-equipment"
 ```
+
+### `conflicting`
+
+Optional list of conflicting packages (zero or more).
+When installing a package, *sc4pac* ensures that none of the conflicting packages are installed at the same time.
+```yaml
+conflicting:
+- "saruman:isengard-tower"
+```
+When two packages are in conflict with each other, it is enough to add the `conflicting` field to just one of them.
+The conflict will be recognized automatically for the other, as well.
 
 ### `assets` :id=asset-references
 
@@ -294,10 +313,11 @@ Add a warning to inform the user that the INI needs to be manually copied to the
 ```yaml
 info:
   warning: |-
-    This DLL plugin comes with an INI configuration file.
-    To complete the installation, copy the .ini file from the package subfolder
-    into the root directory of your Plugins folder
-    and edit the file to set your preferences.
+    This DLL plugin comes with an INI configuration file:
+
+    * `filename.ini`
+
+    To complete the installation, copy this file from the package subfolder into the root directory of your Plugins folder and edit the file to set your preferences.
 ```
 
 ### `info`
@@ -320,7 +340,8 @@ A `description` may consist of several paragraphs of contextual information (it 
 > * An introductory sentence or two about real-life architectural context is fine, but it should not take up several paragraphs.
 > * Phrase the `description` in a neutral way and avoid first-person.
 
-You should also inform about possible `conflicts`. If there are none, omit this field.
+You should also inform about potential incompatibilities: `conflicts`. If there are none, omit this field.
+In contrast to the `conflicting` field, this is an information-only text field which is not processed by *sc4pac* in any way.
 
 Moreover, you can add a `warning` message that is displayed during the installation process.
 This should be used sparingly and only included in case a user has to take action before or after installing a package.
@@ -359,6 +380,9 @@ Putting together all the pieces, a complete YAML file might look as follows.
 
 A YAML file can contain any number of assets and packages, as long as each asset or package definition is separated by `---` from the previous one.
 The location of the YAML files does not matter, so they can be organized in a directory structure.
+
+?> Alternatively, instead of separating multiple packages and assets by `---`, all definitions can be placed in arrays `packages` and optionally `assets`.
+   This has the benefit of allowing the use of YAML *anchors*, *aliases* and *overrides* across packages in the same file to [reduce repetition](https://github.com/memo33/sc4pac-tools/pull/35).
 
 ## Options
 
@@ -466,6 +490,54 @@ For complete examples, inspect the metadata of:
      conflicts: Only a DarkNite model exists for this building, so the same model is installed with either nightmode setting.
    ```
 
+### `withConditions`
+
+This is an alternative format for specifying multiple variants.
+It is often much less verbose in case of complex packages that have many different variant IDs.
+
+```yaml
+assets:
+- assetId: "dumbledore-hogwarts-castle"
+  include:
+  - "/Lots/"
+  withConditions:
+  - ifVariant: { nightmode: "standard" }
+    include:
+    - "/MN models/"
+  - ifVariant: { nightmode: "dark" }
+    include:
+    - "/DN models/"
+  - ifVariant: { roadstyle: "US" }
+    include:
+    - "/US textures/"
+  - ifVariant: { roadstyle: "EU" }
+    include:
+    - "/EU textures/"
+  - ifVariant: { driveside: "right" }
+    include: []  # no extra path files for driveside=right
+  - ifVariant: { driveside: "left" }
+    include:
+    - "/z_LHD_paths.dat"
+```
+
+Instead of listing all combinations of variants explicitly, the variants are constructed implicitly from the listed `ifVariant` conditions.
+This can be more versatile and succinct for packages with many variants, avoiding combinatorial explosion.
+
+For now, this assumes that the variant IDs are all orthogonal to each other, so the user will be prompted to select all of them before installing the package.
+The `include` and `exclude` lists for all matching conditions are accumulated.
+
+For example, if a user picks the variants `nightmode: standard`, `roadstyle: EU` and `driveside: left`,
+the following files and folders will be extracted from the asset:
+```
+/Lots/
+/MN models/
+/EU textures/
+/z_LHD_paths.dat
+```
+
+One caveat is that one needs to be careful with the `include`/`exclude` patterns to ensure they match for all combinations of variants.
+Otherwise, it can easily happen that a pattern does not match, leading to a warning upon installation.
+
 ### `variantInfo`
 
 You may add descriptions that explain the different variant choices and help in choosing the right one:
@@ -474,11 +546,11 @@ You may add descriptions that explain the different variant choices and help in 
 variantInfo:
 - variantId: "nightmode"
   description: This setting determines whether buildings rendered for DN or MN are installed.
-  - values:
-    - value: "standard"
-      description: the default MaxisNite style (recommended)
-    - value: "dark"
-      description: for use with a DarkNite mod
+  values:
+  - value: "standard"
+    description: the default MaxisNite style (recommended)
+  - value: "dark"
+    description: for use with a DarkNite mod
 ```
 
 Define a default variant by adding `default: true` to one of the values.
@@ -504,6 +576,10 @@ To ensure that your package metadata works as intended, you should test your cha
 - If you created a new YAML file locally on your computer, add its path as a new channel:
   ```sh
   sc4pac channel add "file:///C:/Users/Dumbledore/Desktop/hogwarts-castle.yaml"
+  ```
+- You may also test a YAML file in the sc4pac GUI by adding its path as a new channel in the channel definition list:
+  ```sh
+  file:///C:/Users/Dumbledore/Desktop/hogwarts-castle.yaml
   ```
 - If you created a YAML file directly on GitHub, click the *Raw* button on GitHub to get the direct link to the YAML file and add it as channel:
   ```sh

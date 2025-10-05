@@ -52,6 +52,7 @@ This list will be expanded as more packages are added to the metadata channel.
 * `pkg=jasoncw:cecil-hotel` (highrise CS$ hotel)
 * `pkg=jasoncw:hsbc-tower` (highrise CO$$$ office building)
 * `pkg=mattb325:new-york-w2w-pack-vol01` (medium/high W2W New York buildings)
+* `pkg=jbsimio:smalltown-usa` (Smalltown USA Collection)
 
 ## Industrial
 
@@ -117,9 +118,12 @@ Many additional civic buildings by mattb325 are listed at [Channel](channel/ ':t
 * `pkg=kodlovag:uniform-street-lighting-mod`
 * `pkg=peg:power-tower-pylons` (silvery-gray reskin)
 * `pkg=fanta1990:hang-glider-makeover`
+* `pkg=mgb204:terrain-grass-nam-base` (or `pkg=mgb204:terrain-grass-nam-complete` to override non-network grass textures as well).
 
 ## Gameplay mods
 
+* `pkg=nam:network-addon-mod` (the full NAM, an extensive transportation mod)
+* `pkg=nam:network-addon-mod-lite` (NAM Lite, a more compact variant of the NAM)
 * `pkg=memo:3d-camera-dll` (arbitrary camera angles)
 * `pkg=memo:submenus-dll` (adds more submenus to the game)
 * `pkg=cam:colossus-addon-mod` (adds more growth stages to the game)

@@ -11,7 +11,7 @@ assets:
   # optional transient aura not included in this package for now
   withChecksum:
   - include: "/SC4DataViewExtensions.dll"
-    sha256: 401ff94f8b7f9bfdf6209a1908422125a3aec39248dcf616844cc040f4e8b2fd
+    sha256: 401FF94F8B7F9BFDF6209A1908422125A3AEC39248DCF616844CC040F4E8B2FD
 
 info:
   summary: "A DLL Plugin that extends the game's data views"
@@ -31,6 +31,6 @@ info:
 ---
 assetId: "null-45-data-view-extensions"
 version: "1.0.1"
-lastModified: "2026-02-16T12:48:05Z"
+lastModified: "2026-02-16T11:48:42Z"
 nonPersistentUrl: "https://community.simtropolis.com/files/file/36632-data-view-extensions-dll/?do=download"
 url: "https://github.com/0xC0000054/sc4-data-view-extensions/releases/download/v1.0.1/SC4DataViewExtensions.zip"
